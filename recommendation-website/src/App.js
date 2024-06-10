@@ -5,7 +5,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
-
 function App() {
   const [jsonResponse, setJsonResponse] = useState(null);
 
