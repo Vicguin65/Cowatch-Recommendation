@@ -1,9 +1,8 @@
-import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
-import logo from "../logo.svg";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../logo.svg";
 
 const HomePage = () => {
   const [jsonResponse, setJsonResponse] = useState(null);

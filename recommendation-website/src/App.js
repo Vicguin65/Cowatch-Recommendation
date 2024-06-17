@@ -1,9 +1,8 @@
 import "./App.css";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PanelPage from "./pages/PanelPage";
-import { NavLink } from "react-router-dom";
 
 function App() {
   return (
