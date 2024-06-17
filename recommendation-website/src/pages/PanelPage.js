@@ -1,5 +1,6 @@
 import React from "react";
 import VideoComponent from "../components/VideoComponent";
+import Header from "../components/Header";
 
 const PanelPage = () => {
   const componentCount = 3; // Define the number of times you want to render VideoComponent
@@ -10,14 +11,7 @@ const PanelPage = () => {
         <title>Cowatch</title>
       </head>
       <body className="bg-gray-900">
-        <header className="flex justify-between items-center px-4 py-2 bg-gray-800">
-          <h1 className="text-xl font-bold text-white">Cowatch</h1>
-          <div className="flex items-center space-x-4">
-            <button className="px-3 py-2 text-white rounded-md bg-gray-700 hover:bg-gray-600">
-              Sign In
-            </button>
-          </div>
-        </header>
+        <Header />
 
         <main className="flex flex-col pt-4 px-4">
           <div className="flex justify-between items-center mb-4 gap-4">
