@@ -6,7 +6,7 @@ const VideoComponent = () => {
       <div className="w-full rounded-lg bg-gray-700 shadow-md">
         <a href="#">
           <img
-            src="thumbnail1.jpg"
+            src={require("./thumbnail1.jpg")}
             alt="Video thumbnail"
             className="aspect-w-16 aspect-h-9 object-cover rounded-t-lg"
           />
