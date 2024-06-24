@@ -1,6 +1,7 @@
 import React from "react";
 import VideoComponent from "../components/VideoComponent";
 import Header from "../components/Header";
+import fetchVideos from "../services/fetchVideos";
 
 const PanelPage = () => {
   const componentCount = 3; // Define the number of times you want to render VideoComponent
@@ -24,10 +25,19 @@ const PanelPage = () => {
               Search
             </button>
           </div>
-
-          {Array.from({ length: componentCount }).map((_, index) => (
-            <VideoComponent key={index} />
-          ))}
+          {fetchVideos().map((video) => {
+            return (
+              <VideoComponent
+                key={video.id}
+                title={video.title}
+                description={video.description}
+                channel={video.channel}
+                views={video.views}
+                uploadDate={video.uploadDate}
+                thumbnail={video.thumbnail}
+              />
+            );
+          })}
         </main>
       </body>
     </div>
