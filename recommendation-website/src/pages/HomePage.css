@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #333;
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  align-items: center;
+}
+
+.logo img {
+  width: 1000px;
+  height: auto;
+}
+
+.buttons {
+  margin-top: 2em;
+  display: flex;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 2em;
+  margin: 0 2em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.guest-button {
+  background-color: #555;
+  color: white;
+}
