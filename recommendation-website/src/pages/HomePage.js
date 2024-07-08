@@ -2,10 +2,9 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/images/cowatch_logo.png";
+import logo from "../assets/images/CoWatchLogoInWhite.png";
 import "./HomePage.css";
 import { UserContext } from "../UserContext";
-
 
 const HomePage = () => {
   const backgroundImageUrl =

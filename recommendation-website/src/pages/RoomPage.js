@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import joinIcon from "../assets/images/join_icon.png";
-import createIcon from "../assets/images/create_icon.png";
+import joinIcon from "../assets/images/JoinRoomIconV3.png";
+import createIcon from "../assets/images/CreateRoomIconV3.png";
 import smallIcon from "../assets/images/cowatch_small_icon.png";
 import "./RoomPage.css";
 import { useContext } from "react";
