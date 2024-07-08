@@ -1,19 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UserProvider } from "./UserContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 // TODO:
 // IMPLEMENT SECRETS
-const clientId = "ENTER IT HERE";
+const clientId = "";
 
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={clientId}>
+      <UserProvider>
         <App />
+      </UserProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
 );
