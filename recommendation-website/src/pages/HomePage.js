@@ -24,8 +24,17 @@ const HomePage = () => {
     setJsonResponse(decoded);
     //TODO:
     // Implement google logout
-    if (jsonResponse) setUser({ name: jsonResponse.name });
+    if (decoded) {
+      setUser({ name: decoded.name });
+    } else {
+      console.log("SIGN IN FAILED");
+      setUser({ name: "Guest" });
+    }
     navigate("/room");
+  };
+
+  const handleDemo = () => {
+    navigate("/demo");
   };
 
   return (
@@ -47,6 +56,8 @@ const HomePage = () => {
             console.log("Login Failed");
           }}
         />
+
+        {/* <button onClick={handleDemo}>Two People demo</button> */}
       </div>
     </div>
   );
