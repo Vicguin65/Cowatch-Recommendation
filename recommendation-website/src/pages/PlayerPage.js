@@ -20,7 +20,7 @@ const PlayerPage = () => {
     const videoRef = useRef(null);
 
     const handleBackClick = () => {
-        navigate('/panel'); // 修改为跳转到 PanelPage
+        navigate('/panel'); // jump to PanelPage
     };
 
     const handleInputChange = (e) => {
@@ -113,7 +113,7 @@ const PlayerPage = () => {
                     playlist={playlist}
                     onAddToPlaylist={handleAddToPlaylist}
                     onRemoveFromPlaylist={handleRemoveFromPlaylist}
-                    isVisible={showPlaylist} // 传递播放列表可见状态
+                    isVisible={showPlaylist} // visibility of the playlist
                 />
                 {showPopup && <div className="popup">Video finished</div>}
             </div>

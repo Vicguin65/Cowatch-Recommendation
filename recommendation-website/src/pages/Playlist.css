@@ -12,7 +12,7 @@
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     transition: right 0.3s ease;
-    z-index: 1000; /* 确保播放列表在其他元素之上 */
+    z-index: 1000; /* Stay on the top layer */
 }
 
 .playlist-container.visible {
