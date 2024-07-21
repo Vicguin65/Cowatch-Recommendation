@@ -6,3 +6,9 @@ module.exports = {
   },
   plugins: [],
 };
+
+ 
+module.exports = {
+  // Tailwind CSS configuration
+};
+ 

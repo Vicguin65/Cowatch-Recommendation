@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 
 const VideoComponent = ({
   title,
@@ -16,7 +18,7 @@ const VideoComponent = ({
             <img
               src={thumbnail}
               alt="Video thumbnail"
-              html
+              //html
               className="aspect-w-16 aspect-h-9 object-cover rounded-t-lg m-5"
             />
           </a>
@@ -36,5 +38,15 @@ const VideoComponent = ({
     </section>
   );
 };
+
+VideoComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  channel: PropTypes.string.isRequired,
+  views: PropTypes.number.isRequired,
+  uploadDate: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+};
+
 
 export default VideoComponent;

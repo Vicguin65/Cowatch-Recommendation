@@ -7,8 +7,8 @@ import "./HomePage.css";
 import { UserContext } from "../UserContext";
 
 const HomePage = () => {
-  const backgroundImageUrl =
-    "https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+  //const backgroundImageUrl =
+   // "https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
   const [jsonResponse, setJsonResponse] = useState(null);
   const navigate = useNavigate();

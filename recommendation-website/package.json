@@ -9,10 +9,11 @@
     "@testing-library/user-event": "^13.5.0",
     "gapi-script": "^1.2.0",
     "jwt-decode": "^4.0.0",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -40,6 +41,26 @@
     ]
   },
   "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.8.0",
+    "husky": "^9.1.1",
+    "lint-staged": "^15.2.7",
+    "stylelint": "^16.7.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4",
     "tailwindcss": "^3.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.css": "stylelint --fix"
   }
 }
