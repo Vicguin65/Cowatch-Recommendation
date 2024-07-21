@@ -20,16 +20,41 @@ const HomePage = () => {
   };
 
   const handleSuccessSignIn = (credentialResponse) => {
-    const decoded = jwtDecode(credentialResponse?.credential);
-    setJsonResponse(decoded);
-    //TODO:
-    // Implement google logout
-    if (decoded) {
-      setUser({ name: decoded.name });
-    } else {
-      console.log("SIGN IN FAILED");
-      setUser({ name: "Guest" });
-    }
+    // console.log("here it is");
+    // console.log(credentialResponse);
+    // const decoded = jwtDecode(credentialResponse?.credential);
+    // setJsonResponse(decoded);
+    // //TODO:
+    // // Implement google logout
+    // if (decoded) {
+    //   setUser({ name: decoded.name });
+    // } else {
+    //   console.log("SIGN IN FAILED");
+    //   setUser({ name: "Guest" });
+    // }
+    const userData = {
+      token: credentialResponse.credential,
+    };
+
+    console.log(userData.token);
+    
+    // Send user data to server
+    fetch("http://localhost:5000/api/users/oauth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log("User saved:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+      setUser({name:"Help"});
     navigate("/room");
   };
 
