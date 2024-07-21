@@ -3,7 +3,7 @@ import VideoComponent from "../components/VideoComponent";
 import Header from "../components/Header";
 import fetchVideos from "../services/fetchVideos";
 import { useNavigate } from "react-router-dom";
-import "./PanelPage.css"; // 确保有相应的 CSS 文件
+import "./PanelPage.css"; //CSS file for this page
 
 const PanelPage = () => {
   const navigate = useNavigate();
