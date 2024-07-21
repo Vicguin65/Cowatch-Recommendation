@@ -3,6 +3,7 @@ import backIcon from "../assets/images/back_icon.png";
 import "./JoinRoomPage.css";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import React from "react";
 
 const JoinRoomPage = () => {
   const { user } = useContext(UserContext);

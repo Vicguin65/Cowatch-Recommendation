@@ -4,7 +4,6 @@ import Header from "../components/Header";
 import fetchVideos from "../services/fetchVideos";
 
 const PanelPage = () => {
-  const componentCount = 3; // Define the number of times you want to render VideoComponent
 
   return (
     <div>
