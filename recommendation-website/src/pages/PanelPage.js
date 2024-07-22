@@ -2,17 +2,17 @@ import React from 'react'
 import VideoComponent from '../components/VideoComponent'
 import Header from '../components/Header'
 import fetchVideos from '../services/fetchVideos'
-import { useNavigate } from 'react-router-dom';
-import './PanelPage.css'; //CSS file for this page
+import { useNavigate } from 'react-router-dom'
+import './PanelPage.css' // CSS file for this page
 
 const PanelPage = () => {
   const navigate = useNavigate()
 
   const handlePlayerPageClick = () => {
-    navigate('/player');
+    navigate('/player')
   }
   return (
-    <div className="panel-page">
+    <div className='panel-page'>
       <head>
         <title>Cowatch</title>
       </head>
@@ -33,8 +33,8 @@ const PanelPage = () => {
             </button>
           </div>
         </div>
-        <div className="video-list-container">
-          <div className="video-grid">
+        <div className='video-list-container'>
+          <div className='video-grid'>
             {fetchVideos().map((video) => (
               <VideoComponent
                 key={video.id}
