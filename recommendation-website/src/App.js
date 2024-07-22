@@ -1,4 +1,11 @@
-import "./App.css";
+import './App.css'
+import React from 'react'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import PanelPage from './pages/PanelPage'
+import RoomPage from './pages/RoomPage'
+import JoinRoomPage from './pages/JoinRoomPage'
+import CreateRoomPage from './pages/CreateRoomPage'
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -20,7 +27,7 @@ function App() {
         <Route path="/demo" element={<DemoPage />} />
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
