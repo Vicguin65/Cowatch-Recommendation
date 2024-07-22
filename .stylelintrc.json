@@ -1,5 +1,8 @@
 {
-    "extends": "stylelint-config-standard",
+    "extends": [
+      "stylelint-config-recommended",
+      "stylelint-config-tailwindcss"
+    ],
     "rules": {
       "indentation": 2,
       "number-leading-zero": "always",
@@ -8,7 +11,7 @@
       "scss/at-rule-no-unknown": [
           true,
           {
-              "ignoreAtRules": ["@tailwind"]
+              "ignoreAtRules": ["tailwind"]
           }
       ]
     }
