@@ -32,18 +32,7 @@ jobs:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
-          VALIDATE_ALL_CODEBASE: false
           VALIDATE_CSS: false
-          VALIDATE_HTML: true
-          VALIDATE_CHECKOV: true
-          VALIDATE_GITHUB_ACTIONS: true
-          VALIDATE_GITLEAKS: true
-          VALIDATE_JAVASCRIPT_ES: true
-          VALIDATE_JAVASCRIPT_STANDARD: true
           VALIDATE_JSCPD: false
-          VALIDATE_JSON: true
-          VALIDATE_MARKDOWN: true
-          VALIDATE_NATURAL_LANGUAGE: true
-          VALIDATE_YAML: true
 
 ...
