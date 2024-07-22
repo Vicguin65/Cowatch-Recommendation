@@ -12,9 +12,9 @@ const DraggableItem = ({ id, index, moveItem, url, handleRemove, handleDoubleCli
   const ref = React.useRef(null)
   const [, drop] = useDrop({
     accept: ItemType.VIDEO,
-    hover(item) {
+    hover( item) {
       if (item.index !== index) {
-        moveItem (item.index, index)
+        moveItem( item.index, index)
         item.index = index
       }
     }
