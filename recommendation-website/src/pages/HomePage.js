@@ -42,9 +42,8 @@ const HomePage = () => {
         <GoogleLogin
           onSuccess={
             (credentialResponse) =>
-            handleSuccessSignIn(credentialResponse)
+              handleSuccessSignIn(credentialResponse)
           }
-
           onError={() => {
             console.log('Login Failed')
           }}

@@ -3,8 +3,7 @@ import VideoComponent from '../components/VideoComponent'
 import Header from '../components/Header'
 import fetchVideos from '../services/fetchVideos'
 
-const PanelPage = () => { 
-
+const PanelPage = () =>{
   return (
     <div>
       <head>

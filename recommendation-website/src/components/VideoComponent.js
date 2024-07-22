@@ -16,8 +16,7 @@ const VideoComponent = ({
           <a href='#'>
             <img
               src={thumbnail}
-              alt='Video thumbnail'
-              // html 
+              alt='Video thumbnail'// html 
               className='aspect-w-16 aspect-h-9 object-cover rounded-t-lg m-5'
             />
           </a>
