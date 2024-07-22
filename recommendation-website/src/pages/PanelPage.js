@@ -2,29 +2,40 @@ import React from 'react'
 import VideoComponent from '../components/VideoComponent'
 import Header from '../components/Header'
 import fetchVideos from '../services/fetchVideos'
+import { useNavigate } from 'react-router-dom'
+import './PanelPage.css' // CSS file for this page
 
 const PanelPage = () => {
+  const navigate = useNavigate()
+
+  const handlePlayerPageClick = () => {
+    navigate('/player')
+  }
   return (
-    <div>
+    <div className='panel-page'>
       <head>
         <title>Cowatch</title>
       </head>
       <body className='bg-gray-900'>
-        <Header />
-
-        <main className='flex flex-col pt-4 px-4'>
-          <div className='flex justify-between items-center mb-4 gap-4'>
+        <div className='fixed-content'>
+          <Header />
+          <button className='player-page-button' onClick={handlePlayerPageClick}>
+            Go to Player Page
+          </button>
+          <div className='search-bar'>
             <input
               type='text'
               placeholder='Search'
-              className='w-full px-3 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white'
+              className='search-input'
             />
-            <button className='px-3 py-2 text-white rounded-md bg-gray-700 hover:bg-gray-600'>
+            <button className='search-button'>
               Search
             </button>
           </div>
-          {fetchVideos().map((video) => {
-            return (
+        </div>
+        <div className='video-list-container'>
+          <div className='video-grid'>
+            {fetchVideos().map((video) => (
               <VideoComponent
                 key={video.id}
                 title={video.title}
@@ -34,9 +45,9 @@ const PanelPage = () => {
                 uploadDate={video.uploadDate}
                 thumbnail={video.thumbnail}
               />
-            )
-          })}
-        </main>
+            ))}
+          </div>
+        </div>
       </body>
     </div>
   )
