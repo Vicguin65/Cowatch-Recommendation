@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const APIKEY = '' 
+const APIKEY = ''
 const channelIds = ['UChIs72whgZI9w6d6FhwGGHA', 'UCdqp0KK_Io7TwK5cJMBvB0Q', 'UCrwObTfqv8u1KO7Fgk-FXHQ']
 const MaxResults = 3
 
@@ -22,7 +22,7 @@ export const YTAPI = () => {
               channelId,
               VideoLink: doc.id?.videoId
                 ? 'https://www.youtube.com/embed/' + doc.id.videoId
-                : '',
+                : ''
             }))
             return channelVideos
           } catch (error) {
@@ -36,7 +36,6 @@ export const YTAPI = () => {
     }
 
     fetchVideos()
-    
   }, [])
 
   return (
@@ -53,7 +52,7 @@ export const YTAPI = () => {
                 frameBorder='0'
                 allow='accelerometer autoplay clipboard-write encrypted-media gyroscope picture-in-picture web-share'
                 allowFullScreen
-              ></iframe>
+              />
               <p>Channel ID: {item.channelId}</p> {/* Display channel ID */}
             </div>
           )
