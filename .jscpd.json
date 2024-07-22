@@ -1,0 +1,9 @@
+{
+    "threshold": 0,
+    "exclude": [
+        "src/pages/CreateRoomPage.js",
+        "src/pages/JoinRoomPage.js",
+        "src/pages/CreateRoomPage.css",
+        "src/pages/JoinRoomPage.css"
+    ]
+}
