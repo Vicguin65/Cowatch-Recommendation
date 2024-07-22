@@ -38,7 +38,7 @@ const PlayerPage = () => {
         alert('Please enter a valid YouTube URL')
       }
     } catch (error) {
-        alert('Please enter a valid YouTube URL')
+      alert('Please enter a valid YouTube URL')
     }
   }
 
@@ -92,7 +92,7 @@ const PlayerPage = () => {
           <button onClick={handlePlayClick}>Play</button>
         </div>
         <button className='toggle-button' onClick={togglePlaylist}>
-          {showPlaylist ? 'Hide Playlist': 'Show Playlist'}
+          {showPlaylist ? 'Hide Playlist' : 'Show Playlist'}
         </button>
         <div className='main-content'>
           <div className='video-container'>
@@ -104,7 +104,7 @@ const PlayerPage = () => {
               allowFullScreen
               title='YouTube Video'
               onEnded={handleVideoEnd}
-            ></iframe>
+            />
           </div>
         </div>
         <Playlist
