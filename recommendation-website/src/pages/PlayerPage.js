@@ -44,7 +44,7 @@ const PlayerPage = () => {
 
     const handleVideoSelect = (id) => {
         setVideoId(id);
-        setCurrentVideo(`https://www.youtube.com/watch?v=${id}`);
+        setCurrentVideo(`https://www.youtube.com/watch?v=${id}`); // ***TODO*** check the detection method
     };
 
     const handleVideoEnd = () => {
