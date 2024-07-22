@@ -1,35 +1,34 @@
-import React from "react";
-import VideoComponent from "../components/VideoComponent";
-import Header from "../components/Header";
-import fetchVideos from "../services/fetchVideos";
-import { useNavigate } from "react-router-dom";
-import "./PanelPage.css"; //CSS file for this page
+import React from 'react'
+import VideoComponent from '../components/VideoComponent'
+import Header from '../components/Header'
+import fetchVideos from '../services/fetchVideos'
+import { useNavigate } from 'react-router-dom';
+import './PanelPage.css'; //CSS file for this page
 
 const PanelPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handlePlayerPageClick = () => {
-    navigate("/player");
-  };
-
+    navigate('/player');
+  }
   return (
     <div className="panel-page">
       <head>
         <title>Cowatch</title>
       </head>
-      <body className="bg-gray-900">
-        <div className="fixed-content">
+      <body className='bg-gray-900'>
+        <div className='fixed-content'>
           <Header />
-          <button className="player-page-button" onClick={handlePlayerPageClick}>
+          <button className='player-page-button' onClick={handlePlayerPageClick}>
             Go to Player Page
           </button>
-          <div className="search-bar">
+          <div className='search-bar'>
             <input
-              type="text"
-              placeholder="Search"
-              className="search-input"
+              type='text'
+              placeholder='Search'
+              className='search-input'
             />
-            <button className="search-button">
+            <button className='search-button'>
               Search
             </button>
           </div>
@@ -51,7 +50,7 @@ const PanelPage = () => {
         </div>
       </body>
     </div>
-  );
-};
+  )
+}
 
-export default PanelPage;
+export default PanelPage
