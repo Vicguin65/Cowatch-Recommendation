@@ -5,28 +5,27 @@ import React from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 const ItemType = {
-  VIDEO: 'video',
+  VIDEO: 'video'
 }
 
 const DraggableItem = ({ id, index, moveItem, url, handleRemove, handleDoubleClick, isPlaying }) => {
   const ref = React.useRef(null)
-  
   const [, drop] = useDrop({
     accept: ItemType.VIDEO,
     hover(item) {
       if (item.index !== index) {
-        moveItem(item.index, index)
+        moveItem (item.index, index)
         item.index = index
       }
-    },
+    }
   })
 
   const [{ isDragging }, drag] = useDrag({
     type: ItemType.VIDEO,
     item: { id, index },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
+      isDragging: monitor.isDragging()
+    })
   })
 
   drag(drop(ref))
