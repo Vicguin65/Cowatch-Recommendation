@@ -1,0 +1,90 @@
+/* src/PanelPage.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Top bar fixed on page */
+  }
+  
+  .bg-gray-900 {
+    background-color: #1a202c;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .panel-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .fixed-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    background-color: #2d3748;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  
+  .header {
+    flex: 1;
+  }
+  
+  .player-page-button {
+    padding: 10px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    flex-shrink: 0; 
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; 
+  }
+  
+  .search-input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4a5568;
+    color: white;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Video list container can wrap and roll */
+  .video-list-container {
+    flex-grow: 1; 
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
