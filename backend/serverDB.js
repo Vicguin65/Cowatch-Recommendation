@@ -33,20 +33,13 @@ db.serialize(() => {
         email TEXT NOT NULL UNIQUE,
         googleId TEXT NOT NULL UNIQUE,
         accessToken TEXT,
-        refreshToken TEXT
+        refreshToken TEXT,
+        roomId INTEGER
     )`);
 
   db.run(`CREATE TABLE IF NOT EXISTS rooms (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
-    )`);
-
-  db.run(`CREATE TABLE IF NOT EXISTS user_rooms (
-        user_id INTEGER,
-        room_id INTEGER,
-        PRIMARY KEY (user_id, room_id),
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (room_id) REFERENCES rooms(id)
+        code TEXT NOT NULL UNIQUE
     )`);
 });
 
@@ -62,50 +55,55 @@ app.get("/auth/callback", async (req, res) => {
   const { data } = await oauth2.userinfo.get(); // get user info
 
   try {
-    db.get(`SELECT * FROM users WHERE email = ?`, [data['email']], (err, row) => {
+    db.get(
+      `SELECT * FROM users WHERE email = ?`,
+      [data["email"]],
+      (err, row) => {
         if (err) {
-        //   return res.status(500).json({ error: err.message });
+          res.status(201);
         }
-  
+
         if (row) {
           // Update user tokens if already exists
           db.run(
             `UPDATE users SET accessToken = ?, refreshToken = ? WHERE email = ?`,
-            [tokens['access_token'], tokens['refresh_token'], data['email']],
+            [tokens["access_token"], tokens["refresh_token"], data["email"]],
             function (err) {
               if (err) {
-                // return res.status(500).json({ error: err.message });
+                res.status(201);
               }
-  
-              res.status(200)
+
+              res.status(200);
             }
           );
         } else {
           // Insert new user
           db.run(
             `INSERT INTO users (name, email, googleId, accessToken, refreshToken) VALUES (?, ?, ?, ?, ?)`,
-            [data['name'], data['email'], data['id'], tokens['access_token'], tokens['refresh_token']],
+            [
+              data["name"],
+              data["email"],
+              data["id"],
+              tokens["access_token"],
+              tokens["refresh_token"],
+            ],
             function (err) {
               if (err) {
-                // return res.status(500).json({ error: err.message });
+                res.status(500);
               }
-  
-              res.status(201)
-            //     .json({
-            //       message: "User created",
-            //       user: { id: this.lastID, name, email, googleId },
-            //     });
+
+              res.status(201);
             }
           );
         }
-      });
-    
+      }
+    );
   } catch (error) {
     console.error("Error verifying token:", error);
-    // res.status(400).json({ error: "Invalid token", details: error.message });
+    res.status(400);
   }
 
-console.log(tokens['access_token']);
+  console.log(tokens["access_token"]);
   res.redirect(`http://localhost:3000/room`);
 });
 
@@ -122,6 +120,29 @@ app.get("/auth", async (req, res) => {
     state: req.query.user, // Pass user identifier in state
   });
   res.redirect(url);
+});
+
+app.get("/recommendations", async (req, res) => {
+  var roomId = req.query.roomId; // GET string query param "roomId"
+  const sql = `SELECT *
+           FROM rooms
+           WHERE code  = ?`;
+
+  db.get(sql, [roomId], (err, row) => { 
+    if (err) {
+      console.error(err.message);
+      return res.status(404).send("Invalid ID");
+    }
+
+    if(!row){
+      console.error("No ID Found");
+      return res.status(404).send("Invalid ID");
+    }
+
+    row.
+
+  });
+
 });
 
 // Start server
