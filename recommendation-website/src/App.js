@@ -8,14 +8,6 @@ import JoinRoomPage from './pages/JoinRoomPage'
 import CreateRoomPage from './pages/CreateRoomPage'
 import PlayerPage from './pages/PlayerPage'
 
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import PanelPage from "./pages/PanelPage";
-import RoomPage from "./pages/RoomPage";
-import JoinRoomPage from "./pages/JoinRoomPage";
-import CreateRoomPage from "./pages/CreateRoomPage";
-import DemoPage from "./pages/DemoPage";
-
 function App() {
   return (
     <Router>
