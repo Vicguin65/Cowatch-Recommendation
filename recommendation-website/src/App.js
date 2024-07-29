@@ -8,6 +8,7 @@ import JoinRoomPage from './pages/JoinRoomPage'
 import CreateRoomPage from './pages/CreateRoomPage'
 import PlayerPage from './pages/PlayerPage'
 import AboutUsPage from './pages/AboutUsPage'
+import FeedbackPage from './pages/FeedbackPage'
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
         <Route path='/create-room' element={<CreateRoomPage />} />
         <Route path='/player' element={<PlayerPage />} />
         <Route path='/about-us' element={<AboutUsPage />} />
+        <Route path='/feedback' element={<FeedbackPage />} />
       </Routes>
     </Router>
   )

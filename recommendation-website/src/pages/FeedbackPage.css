@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: white;
+  }
+  
+  .feedback{
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .fbForm {
+    margin-top: 50px;
+  }
+  
+  .fbForm input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 11px;
+    text-align: center;
+    color: black;
+  }
