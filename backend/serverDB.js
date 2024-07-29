@@ -130,7 +130,7 @@ app.get('/auth/callback', async (req, res) => {
     res.status(400)
   }
 
-  const token = jwt.sign(data['id, process.env.TOKEN_SECRET, {
+  const token = jwt.sign(data.id, process.env.TOKEN_SECRET, {
     expiresIn: '4h'
   })
 
