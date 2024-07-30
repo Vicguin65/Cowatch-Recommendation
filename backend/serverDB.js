@@ -288,6 +288,7 @@ app.post("/join-room", verifyToken, (req, res) => {
   res.status(200).json({ message: "successfully joined room" });
 });
 
+// get channel list from one's oauth token
 async function getSubscriptions(oauthToken) {
   const auth = new google.auth.OAuth2();
   auth.setCredentials({ access_token: oauthToken });
@@ -302,6 +303,7 @@ async function getSubscriptions(oauthToken) {
   return response.data.items.map((item) => item.snippet.customUrl); // Or return other relevant data
 }
 
+// get channel lists
 app.get("/channels", (req, res) => {
   const { roomCode } = req.query.roomCode;
 
