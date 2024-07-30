@@ -51,7 +51,7 @@ db.serialize(() => {
 // Middleware to verify token
 const verifyToken = (req, res, next) => {
   // Extract token from headers or query parameters
-  const token = req.headers["authorization"] || req.query.token;
+  const token = req.headers.authorization || req.query.token;
 
   if (!token) {
     return res.status(403).send({ message: "No token provided." });
@@ -70,7 +70,7 @@ const verifyToken = (req, res, next) => {
 };
 
 app.get("/auth/callback", async (req, res) => {
-  const { code, state } = req.query;
+  const { code } = req.query;
   const { tokens } = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
 
@@ -81,62 +81,56 @@ app.get("/auth/callback", async (req, res) => {
   const { data } = await oauth2.userinfo.get(); // get user info
 
   try {
-    db.get(
-      `SELECT * FROM users WHERE email = ?`,
-      [data["email"]],
-      (err, row) => {
-        if (err) {
-          res.status(201);
-        }
+    db.get(`SELECT * FROM users WHERE email = ?`, [data.email], (err, row) => {
+      if (err) {
+        res.status(201);
+      }
 
-        if (row) {
-          // Update user tokens if already exists
-          db.run(
-            `UPDATE users SET accessToken = ?, refreshToken = ?, roomCode = -1, WHERE email = ?`,
-            [tokens["access_token"], tokens["refresh_token"], data["email"]],
-            function (err) {
-              if (err) {
-                res.status(201);
-              }
-
-              res.status(200);
-            }
-          );
-        } else {
-          // Insert new user
-          db.run(
-            `INSERT INTO users (name, email, googleId, accessToken, refreshToken, roomCode) VALUES (?, ?, ?, ?, ?, ?)`,
-            [
-              data["name"],
-              data["email"],
-              data["id"],
-              tokens["access_token"],
-              tokens["refresh_token"],
-              -1,
-            ],
-            function (err) {
-              if (err) {
-                res.status(500);
-              }
-
+      if (row) {
+        // Update user tokens if already exists
+        db.run(
+          `UPDATE users SET accessToken = ?, refreshToken = ?, roomCode = -1, WHERE email = ?`,
+          [tokens.access_token, tokens.refresh_token, data.email],
+          function (err) {
+            if (err) {
               res.status(201);
             }
-          );
-        }
+
+            res.status(200);
+          }
+        );
+      } else {
+        // Insert new user
+        db.run(
+          `INSERT INTO users (name, email, googleId, accessToken, refreshToken, roomCode) VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            data.name,
+            data.email,
+            data.id,
+            tokens.access_token,
+            tokens.refresh_token,
+            -1,
+          ],
+          function (err) {
+            if (err) {
+              res.status(500);
+            }
+
+            res.status(201);
+          }
+        );
       }
-    );
+    });
   } catch (error) {
     console.error("Error verifying token:", error);
     res.status(400);
   }
 
-  const token = jwt.sign(data["id"], process.env.TOKEN_SECRET, {
+  const token = jwt.sign(data.id, process.env.TOKEN_SECRET, {
     expiresIn: "4h",
   });
 
-  res.redirect(
-    `http://localhost:3000/room?token=${token}&googleId=${data["id"]}`
-  );
+  res.redirect(`http://localhost:3000/room?token=${token}&googleId=${data.id}`);
 });
 
 app.get("/auth", async (req, res) => {
@@ -216,7 +210,7 @@ app.post("/create-room", verifyToken, (req, res) => {
   });
 
   const newRoomCode = createUniqueCode();
-  if (newRoomCode == -1) {
+  if (newRoomCode === -1) {
     res.status(501).json({ message: "ERROR: could not make room" });
   }
 
@@ -316,9 +310,10 @@ app.get("/channels", (req, res) => {
       throw err;
     }
 
+    let token;
     // Iterate through the rows
     rows.forEach(async (row) => {
-      let token = row.accessToken;
+      token = row.accessToken;
       try {
         const subscriptions = await getSubscriptions(token);
         allSubscriptions = [...allSubscriptions, ...subscriptions];

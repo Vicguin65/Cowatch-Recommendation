@@ -8,7 +8,7 @@ import JoinRoomPage from './pages/JoinRoomPage'
 import CreateRoomPage from './pages/CreateRoomPage'
 import PlayerPage from './pages/PlayerPage'
 
-function App() {
+function App () {
   return (
     <Router>
       <Routes>
