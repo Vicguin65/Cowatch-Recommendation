@@ -4,16 +4,31 @@ import backIcon from "../assets/images/back_icon.png";
 import "./CreateRoomPage.css"; // Import the CSS file
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import axios from "axios";
 
 const CreateRoom = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleIconClick = () => {
     navigate("/room");
   };
 
-  const handleRoomClick = () => {
+  const handleRoomClick = async () => {
+    const payload = { googleId: user.sub };
+    console.log("payload", payload);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/create-room",
+        payload
+      );
+      const { codeId } = response.data;
+      setUser({ name: user.name, sub: user.sub, codeId });
+      console.log("codeId", codeId);
+      console.log("user with code", user);
+    } catch (err) {
+      console.log("err", err);
+    }
     navigate("/panel");
   };
 

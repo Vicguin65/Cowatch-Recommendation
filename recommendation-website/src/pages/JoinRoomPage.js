@@ -4,10 +4,8 @@ import "./JoinRoomPage.css";
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
-import { GlobalStateContext } from "../GlobalStateContext";
 
 const JoinRoomPage = () => {
-  const { sub, setSub } = useContext(GlobalStateContext);
   const { user } = useContext(UserContext);
   const [roomCode, setRoomCode] = useState("");
   const navigate = useNavigate();
@@ -17,7 +15,7 @@ const JoinRoomPage = () => {
   };
 
   const handleRoomClick = async () => {
-    const payload = { googleId: sub, roomCode };
+    const payload = { googleId: user.sub, roomCode };
     console.log("payload", payload);
     try {
       const response = await axios.post(

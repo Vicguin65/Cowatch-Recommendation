@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const APIKEY = "AIzaSyCHG4IRkAf0HGPiiRafWt-Am52JSjY5FJM"; //122112
+// const APIKEY = "AIzaSyCHG4IRkAf0HGPiiRafWt-Am52JSjY5FJM"; //122112
 // const APIKEY = "AIzaSyB4DQq2fgqXrN66myLe0gWHxeXW2T3ud1Q"; //1221
+// const APIKEY = "AIzaSyBpIuPdFsEcOIzGIsD-YpDA2zyRqqev76E";
+const APIKEY = "AIzaSyAbhZ9upkApS0IIBU2ehVzi0U_lrOCUSoQ";
 const channelIds = [
   "UChIs72whgZI9w6d6FhwGGHA",
   "UCdqp0KK_Io7TwK5cJMBvB0Q",
@@ -44,16 +46,14 @@ export const YTAPI = () => {
     fetchVideos();
   }, []);
 
-  console.log(allVideos);
-
   return (
-    <div className="p-10 w-screen grid grid-cols-3 gap-4">
+    <div className="p-4 grid grid-cols-3 gap-4">
       {allVideos.map((item) => {
         if (item.VideoLink) {
           return (
             <div key={item.id.videoId} className="flex flex-col items-center">
               <iframe
-                width="560"
+                width="100%"
                 height="315"
                 src={item.VideoLink}
                 title="YouTube video player"
@@ -64,8 +64,7 @@ export const YTAPI = () => {
               ></iframe>
               <p className="mt-2 text-sm text-gray-600">
                 Channel ID: {item.channelId}
-              </p>{" "}
-              {/* Display channel ID */}
+              </p>
             </div>
           );
         }

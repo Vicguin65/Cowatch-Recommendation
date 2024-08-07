@@ -1,22 +1,20 @@
-import React from "react";
-import VideoComponent from "../components/VideoComponent";
-import Header from "../components/Header";
-import fetchVideos from "../services/fetchVideos";
+import React, { useContext } from "react";
 import { YTAPI } from "../ytapi";
+import { UserContext } from "../UserContext";
 
 const PanelPage = () => {
-  const componentCount = 3; // Define the number of times you want to render VideoComponent
+  const { user } = useContext(UserContext);
 
   return (
-    <div>
-      <head>
-        <title>Cowatch</title>
-      </head>
-      <body className="h-fit bg-gray-900">
-        <main className="flex flex-col pt-4 px-4">
-          <YTAPI />
-        </main>
-      </body>
+    <div className="h-screen w-screen flex flex-col bg-gray-900">
+      <div className="p-4">
+        <h1 className="text-xl text-white font-bold">
+          {user && user.codeId && <div>Room Code: {user.codeId}</div>}
+        </h1>
+      </div>
+      <div className="flex-1 overflow-auto">
+        <YTAPI />
+      </div>
     </div>
   );
 };

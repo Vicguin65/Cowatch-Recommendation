@@ -5,14 +5,12 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/CoWatchLogoInWhite.png";
 import "./HomePage.css";
 import { UserContext } from "../UserContext";
-import { GlobalStateContext } from "../GlobalStateContext";
 
 const HomePage = () => {
   const backgroundImageUrl =
     "https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
   const [jsonResponse, setJsonResponse] = useState(null);
-  const { sub, setSub } = useContext(GlobalStateContext);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
@@ -26,8 +24,6 @@ const HomePage = () => {
     // console.log(credentialResponse);
     const decoded = jwtDecode(credentialResponse?.credential);
     console.log("decoded", decoded);
-    const sub = decoded.sub;
-    setSub(sub);
     // setJsonResponse(decoded);
     // //TODO:
     // // Implement google logout
@@ -61,7 +57,7 @@ const HomePage = () => {
         console.error("Error:", error);
       });
 
-    setUser({ name: decoded.name });
+    setUser({ name: decoded.name, sub: decoded.sub });
     navigate("/room");
   };
 
