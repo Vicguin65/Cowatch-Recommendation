@@ -4,15 +4,9 @@ import React, { useEffect, useState } from "react";
 // const APIKEY = "AIzaSyB4DQq2fgqXrN66myLe0gWHxeXW2T3ud1Q"; //1221
 // const APIKEY = "AIzaSyBpIuPdFsEcOIzGIsD-YpDA2zyRqqev76E";
 const APIKEY = "AIzaSyAbhZ9upkApS0IIBU2ehVzi0U_lrOCUSoQ";
-const channelIds = [
-  "UChIs72whgZI9w6d6FhwGGHA",
-  "UCdqp0KK_Io7TwK5cJMBvB0Q",
-  "UCrwObTfqv8u1KO7Fgk-FXHQ",
-  "UCoUluzWcoIO3eHa5F7SJnxg",
-];
 const MaxResults = 3;
 
-export const YTAPI = () => {
+export const YTAPI = ({ channelIds }) => {
   const [allVideos, setAllVideos] = useState([]);
 
   useEffect(() => {
