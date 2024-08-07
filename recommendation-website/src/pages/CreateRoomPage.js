@@ -5,6 +5,7 @@ import "./CreateRoomPage.css"; // Import the CSS file
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
+import URL from "../global";
 
 const CreateRoom = () => {
   const { user, setUser } = useContext(UserContext);
@@ -18,10 +19,7 @@ const CreateRoom = () => {
     const payload = { googleId: user.sub };
     console.log("payload", payload);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/create-room",
-        payload
-      );
+      const response = await axios.post(`${URL}/create-room`, payload);
       const { codeId } = response.data;
       setUser({ name: user.name, sub: user.sub, codeId });
       console.log("codeId", codeId);

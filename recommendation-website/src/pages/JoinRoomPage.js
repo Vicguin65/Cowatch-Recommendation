@@ -4,6 +4,7 @@ import "./JoinRoomPage.css";
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
+import URL from "../global";
 
 const JoinRoomPage = () => {
   const { user } = useContext(UserContext);
@@ -18,10 +19,7 @@ const JoinRoomPage = () => {
     const payload = { googleId: user.sub, roomCode };
     console.log("payload", payload);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/join-room",
-        payload
-      );
+      const response = await axios.post(`${URL}/join-room`, payload);
       console.log("response", response);
     } catch (err) {
       console.log("err", err);

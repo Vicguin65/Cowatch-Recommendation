@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/CoWatchLogoInWhite.png";
 import "./HomePage.css";
 import { UserContext } from "../UserContext";
+import URL from "../global";
 
 const HomePage = () => {
   const backgroundImageUrl =

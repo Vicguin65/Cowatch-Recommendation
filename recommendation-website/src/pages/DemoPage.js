@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const DemoPage = () => {
-
   const handleAuthOne = () => {
     window.location.href = "http://localhost:5000/auth?user=1";
   };
@@ -14,7 +13,7 @@ const DemoPage = () => {
   const [channelOne, setChannelOne] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/get-subscriptions-1").then((response) => {
+    axios.get(`${URL}/get-subscriptions-1`).then((response) => {
       setChannelOne(response.data);
     });
   }, []);
@@ -22,7 +21,7 @@ const DemoPage = () => {
   const [channelTwo, setChannelTwo] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/get-subscriptions-2").then((response) => {
+    axios.get(`${URL}/get-subscriptions-2`).then((response) => {
       setChannelTwo(response.data);
     });
   }, []);
@@ -32,23 +31,21 @@ const DemoPage = () => {
       <button onClick={handleAuthOne}>Select User 1</button>
       <button onClick={handleAuthTwo}>Select User 2</button>
       <h1>User one channels:</h1>
-      <ItemList items ={channelOne}/>
-    
-        <br/>
+      <ItemList items={channelOne} />
+
+      <br />
       <h1>User two channels:</h1>
-      <ItemList items ={channelTwo}/>
+      <ItemList items={channelTwo} />
     </div>
   );
 };
 
 const ItemList = ({ items }) => {
-    if(!items) return;
+  if (!items) return;
   return (
     <ul>
       {items.map((item) => (
-        <h1>
-          {JSON.stringify(item['snippet']['title'])}
-        </h1>
+        <h1>{JSON.stringify(item["snippet"]["title"])}</h1>
       ))}
     </ul>
   );
