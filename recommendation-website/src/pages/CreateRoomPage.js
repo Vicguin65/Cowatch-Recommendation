@@ -19,14 +19,16 @@ const CreateRoom = () => {
 
   return (
     <div className="create-room">
-      <div className="header">
-        <div className="back-button">
-          <img src={backIcon} alt="Back" onClick={handleIconClick} />
-        </div>
-        <div className="guest-info">You are signed in as {user.name}</div>
-      </div>
+      <img
+        src={backIcon}
+        alt="Back"
+        height={80}
+        width={80}
+        className="absolute left-12 top-12 cursor-pointer"
+        onClick={handleIconClick}
+      />
       <div className="content">
-        <h1>Settings:</h1>
+        <h1 className="absolute top-24 ml-20 text-xl font-bold">Settings:</h1>
         <div className="settings">
           <label>
             <input type="checkbox" />
@@ -37,7 +39,12 @@ const CreateRoom = () => {
             Anyone can suggest videos
           </label>
         </div>
-        <button onClick={handleRoomClick}>Create Room</button>
+        <button
+          onClick={handleRoomClick}
+          className="bg-gray-500 hover:bg-gray-700 duration-200 mt-5"
+        >
+          Create Room
+        </button>
       </div>
     </div>
   );

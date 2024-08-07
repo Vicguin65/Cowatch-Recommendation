@@ -18,16 +18,23 @@ const JoinRoomPage = () => {
 
   return (
     <div className="enter-room">
-      <div className="header">
-        <div className="back-button">
-          <img src={backIcon} alt="Back" onClick={handleIconClick} />
-        </div>
-        <div className="guest-info">You are signed in as {user.name}</div>
-      </div>
+      <img
+        src={backIcon}
+        alt="Back"
+        height={80}
+        width={80}
+        className="absolute left-12 top-12 cursor-pointer"
+        onClick={handleIconClick}
+      />
       <div className="content">
         <h1>ENTER ROOM CODE:</h1>
         <input type="text" placeholder="INSERT 5 DIGIT CODE" maxLength="5" />
-        <button onClick={handleRoomClick}>Enter</button>
+        <button
+          onClick={handleRoomClick}
+          className="bg-gray-500 hover:bg-gray-700 duration-200 mt-5"
+        >
+          Enter
+        </button>
       </div>
     </div>
   );

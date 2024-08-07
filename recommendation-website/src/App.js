@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import "./App.css";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -22,3 +23,31 @@ function App() {
 }
 
 export default App;
+=======
+import "./App.css";
+
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PanelPage from "./pages/PanelPage";
+import RoomPage from "./pages/RoomPage";
+import JoinRoomPage from "./pages/JoinRoomPage";
+import CreateRoomPage from "./pages/CreateRoomPage";
+import DemoPage from "./pages/DemoPage";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/panel" element={<PanelPage />} />
+        <Route path="/room" element={<RoomPage />} />
+        <Route path="/join-room" element={<JoinRoomPage />} />
+        <Route path="/create-room" element={<CreateRoomPage />} />
+        <Route path="/demo" element={<DemoPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+>>>>>>> Stashed changes

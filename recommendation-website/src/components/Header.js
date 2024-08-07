@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <nav className="bg-gray-800 w-full p-5 space-x-12 flex items-center">
+    <nav className="bg-gray-800 w-screen p-5 space-x-12 flex items-center">
       <a href="/" className="text-white text-lg font-bold">
         Cowatch
       </a>
