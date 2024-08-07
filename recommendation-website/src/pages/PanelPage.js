@@ -1,56 +1,24 @@
-import React from 'react'
-import VideoComponent from '../components/VideoComponent'
-import Header from '../components/Header'
-import fetchVideos from '../services/fetchVideos'
-import { useNavigate } from 'react-router-dom'
-import './PanelPage.css' // CSS file for this page
+import React from "react";
+import VideoComponent from "../components/VideoComponent";
+import Header from "../components/Header";
+import fetchVideos from "../services/fetchVideos";
+import { YTAPI } from "../ytapi";
 
 const PanelPage = () => {
-  const navigate = useNavigate()
+  const componentCount = 3; // Define the number of times you want to render VideoComponent
 
-  const handlePlayerPageClick = () => {
-    navigate('/player')
-  }
   return (
-    <div className='panel-page'>
+    <div>
       <head>
         <title>Cowatch</title>
       </head>
-      <body className='bg-gray-900'>
-        <div className='fixed-content'>
-          <Header />
-          <button className='player-page-button' onClick={handlePlayerPageClick}>
-            Go to Player Page
-          </button>
-          <div className='search-bar'>
-            <input
-              type='text'
-              placeholder='Search'
-              className='search-input'
-            />
-            <button className='search-button'>
-              Search
-            </button>
-          </div>
-        </div>
-        <div className='video-list-container'>
-          <div className='video-grid'>
-            {fetchVideos().map((video) => (
-              <VideoComponent
-                key={video.id}
-                title={video.title}
-                description={video.description}
-                channel={video.channel}
-                views={video.views}
-                uploadDate={video.uploadDate}
-                thumbnail={video.thumbnail}
-              />
-            ))}
-          </div>
-        </div>
+      <body className="h-fit bg-gray-900">
+        <main className="flex flex-col pt-4 px-4">
+          <YTAPI />
+        </main>
       </body>
     </div>
-  )
-}
+  );
+};
 
-export default PanelPage
+export default PanelPage;

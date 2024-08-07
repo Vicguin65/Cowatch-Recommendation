@@ -190,7 +190,7 @@ const createUniqueCode = () => {
 };
 
 // Endpoint to create a new room
-app.post("/create-room", verifyToken, (req, res) => {
+app.post("/create-room", (req, res) => {
   const { googleId } = req.query.googleId;
 
   let userId;
@@ -237,7 +237,7 @@ app.post("/create-room", verifyToken, (req, res) => {
 });
 
 // Endpoint to join a room
-app.post("/join-room", verifyToken, (req, res) => {
+app.post("/join-room", (req, res) => {
   const { googleId } = req.query.googleId;
   const { roomCode } = req.query.roomCode;
 
