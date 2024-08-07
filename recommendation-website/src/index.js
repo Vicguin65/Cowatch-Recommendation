@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // IMPLEMENT SECRETS
 const clientId =
   "496286067266-dcs8nema4o7ci9h8fh4ip37spi74u0et.apps.googleusercontent.com";
-
+  
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={clientId}>

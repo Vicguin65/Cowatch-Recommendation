@@ -20,43 +20,17 @@ const HomePage = () => {
     navigate("/room");
   };
 
-  const handleSuccessSignIn = (credentialResponse) => {
-    // console.log("here it is");
-    // console.log(credentialResponse);
-    const decoded = jwtDecode(credentialResponse?.credential);
-    console.log("decoded", decoded);
-    // setJsonResponse(decoded);
-    // //TODO:
-    // // Implement google logout
-    // if (decoded) {
-    //   setUser({ name: decoded.name });
-    // } else {
-    //   console.log("SIGN IN FAILED");
-    //   setUser({ name: "Guest" });
-    // }
-    const userData = {
-      token: credentialResponse.credential,
-    };
-
-    console.log(userData);
-
-    console.log(userData.token);
-
-    // Send user data to server
-    fetch("http://localhost:5000/api/users/oauth", {
-      method: "POST",
+  const handleSuccessSignIn = async (credentialResponse) => {
+    
+    const { credential } = credentialResponse;
+    // Send the token to your backend for verification and saving
+    const res = await fetch('http://localhost:5000/api/auth/google', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("User saved:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      body: JSON.stringify({ idToken: credential }),
+    });
 
     setUser({ name: decoded.name, sub: decoded.sub });
     navigate("/room");
@@ -87,6 +61,11 @@ const HomePage = () => {
           onError={() => {
             console.log("Login Failed");
           }}
+          scopes = {[
+            "https://www.googleapis.com/auth/youtube.readonly",
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile",
+          ]}
         />
 
         {/* <button onClick={handleDemo}>Two People demo</button> */}

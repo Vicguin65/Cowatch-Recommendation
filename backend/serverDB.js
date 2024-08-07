@@ -8,6 +8,7 @@ const cors = require("cors");
 const { google } = require("googleapis");
 const youtube = google.youtube("v3");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 const app = express();
 const port = 5000;
@@ -68,6 +69,80 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
+
+app.post("/api/auth/google", async (req, res) => {
+  const { idToken } = req.body;
+
+  client = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+
+  );
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { sub, email, name, picture } = payload;
+
+    // const scopes = [
+    //   "https://www.googleapis.com/auth/youtube.readonly",
+    //   "https://www.googleapis.com/auth/userinfo.email",
+    //   "https://www.googleapis.com/auth/userinfo.profile",
+    // ];
+
+    // const authorizationUrl = oauth2Client.generateAuthUrl({
+    //   // 'online' (default) or 'offline' (gets refresh_token)
+    //   access_type: 'offline',
+    //   /** Pass in the scopes array defined above.
+    //     * Alternatively, if only one scope is needed, you can pass a scope URL as a string */
+    //   scope: scopes,
+    //   // Enable incremental authorization. Recommended as a best practice.
+    //   include_granted_scopes: true
+    // });
+
+    // console.log(authorizationUrl);
+
+    // Exchange the ID token for access and refresh tokens
+    const response = await axios.post(
+      "https://oauth2.googleapis.com/token",
+      null,
+      {
+        params: {
+          code: idToken,
+          client_id: process.env.GOOGLE_CLIENT_ID,
+          client_secret: process.env.GOOGLE_CLIENT_SECRET,
+          grant_type: "authorization_code",
+          redirect_uri: 'postmessage',
+          
+        },
+      }
+    );
+
+    // const { access_token, refresh_token } = response.data;
+
+    // Save the user information and tokens to your database
+    const user = {
+      googleId: sub,
+      email,
+      name,
+      picture,
+      // accessToken: access_token,
+      // refreshToken: refresh_token,
+    };
+
+    // await saveUserToDatabase(user);
+    console.log(user);
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 app.get("/auth/callback", async (req, res) => {
   const { code } = req.query;
@@ -134,11 +209,7 @@ app.get("/auth/callback", async (req, res) => {
 });
 
 app.get("/auth", async (req, res) => {
-  const scopes = [
-    "https://www.googleapis.com/auth/youtube.readonly",
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-  ];
+  
 
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
