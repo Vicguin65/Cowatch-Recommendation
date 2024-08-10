@@ -1,56 +1,56 @@
-import React from 'react'
-import VideoComponent from '../components/VideoComponent'
-import Header from '../components/Header'
-import fetchVideos from '../services/fetchVideos'
-import { useNavigate } from 'react-router-dom'
-import './PanelPage.css' // CSS file for this page
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { YTAPI } from "../ytapi";
+import { UserContext } from "../UserContext";
 
+// Panel Page
 const PanelPage = () => {
-  const navigate = useNavigate()
+  const { user } = useContext(UserContext);
+  const [channelIds, setChannelIds] = useState([]);
+  // const channelIds = [
+  //   "UChIs72whgZI9w6d6FhwGGHA",
+  //   "UCdqp0KK_Io7TwK5cJMBvB0Q",
+  //   "UCrwObTfqv8u1KO7Fgk-FXHQ",
+  //   "UCoUluzWcoIO3eHa5F7SJnxg",
+  // ];
 
-  const handlePlayerPageClick = () => {
-    navigate('/player')
-  }
+  useEffect(() => {
+    (async () => {
+      if (user && user.roomCode) {
+        try {
+          const response = axios.get(`${URL}/channels`, {
+            params: { codeId: user.roomCode },
+          });
+          const { subscriptions } = response.data;
+          setChannelIds(subscriptions);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    })();
+  }, [user]);
+
+  // Return Page
   return (
-    <div className='panel-page'>
-      <head>
-        <title>Cowatch</title>
-      </head>
-      <body className='bg-gray-900'>
-        <div className='fixed-content'>
-          <Header />
-          <button className='player-page-button' onClick={handlePlayerPageClick}>
-            Go to Player Page
-          </button>
-          <div className='search-bar'>
-            <input
-              type='text'
-              placeholder='Search'
-              className='search-input'
-            />
-            <button className='search-button'>
-              Search
-            </button>
+    <div className="h-screen w-screen flex flex-col justify-center items-center bg-gray-900">
+      {channelIds.length > 0 ? (
+        <>
+          <div className="p-4">
+            <h1 className="text-xl text-white font-bold">
+              {user && user.codeId && <div>Room Code: {user.codeId}</div>}
+            </h1>
           </div>
-        </div>
-        <div className='video-list-container'>
-          <div className='video-grid'>
-            {fetchVideos().map((video) => (
-              <VideoComponent
-                key={video.id}
-                title={video.title}
-                description={video.description}
-                channel={video.channel}
-                views={video.views}
-                uploadDate={video.uploadDate}
-                thumbnail={video.thumbnail}
-              />
-            ))}
+          <div className="flex-1 overflow-auto">
+            <YTAPI channelIds={channelIds} />
           </div>
-        </div>
-      </body>
+        </>
+      ) : (
+        <>
+          <h1>Loading...</h1>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default PanelPage
+export default PanelPage;
