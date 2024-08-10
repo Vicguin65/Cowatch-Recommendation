@@ -3,6 +3,7 @@ import axios from "axios";
 import { YTAPI } from "../ytapi";
 import { UserContext } from "../UserContext";
 
+// Panel Page
 const PanelPage = () => {
   const { user } = useContext(UserContext);
   const [channelIds, setChannelIds] = useState([]);
@@ -29,6 +30,7 @@ const PanelPage = () => {
     })();
   }, [user]);
 
+  // Return Page
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-gray-900">
       {channelIds.length > 0 ? (

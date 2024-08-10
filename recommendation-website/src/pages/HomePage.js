@@ -7,6 +7,7 @@ import "./HomePage.css";
 import { UserContext } from "../UserContext";
 import URL from "../global";
 
+// HomePage
 const HomePage = () => {
   const backgroundImageUrl =
     "https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
@@ -15,19 +16,20 @@ const HomePage = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
+  // Handler for guestClick
   const handleGuestClick = () => {
     setUser({ name: "Guest" });
     navigate("/room");
   };
 
+  // Handler for successful sign-in and redirect to next page
   const handleSuccessSignIn = async (credentialResponse) => {
-    
     const { credential } = credentialResponse;
     // Send the token to your backend for verification and saving
-    const res = await fetch('http://localhost:5000/api/auth/google', {
-      method: 'POST',
+    const res = await fetch("http://localhost:5000/api/auth/google", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ idToken: credential }),
     });
@@ -36,15 +38,15 @@ const HomePage = () => {
     navigate("/room");
   };
 
+  // Handler for redirect to demo page
   const handleDemo = () => {
     navigate("/demo");
   };
 
+  // Return Page
   return (
     <div className="container">
-      {/* <div className="logo"> */}
       <img src={logo} height={140} width={450} alt="CoWatch Logo" />
-      {/* </div> */}
 
       <div className="buttons">
         <button
@@ -61,14 +63,12 @@ const HomePage = () => {
           onError={() => {
             console.log("Login Failed");
           }}
-          scopes = {[
+          scopes={[
             "https://www.googleapis.com/auth/youtube.readonly",
             "https://www.googleapis.com/auth/userinfo.email",
             "https://www.googleapis.com/auth/userinfo.profile",
           ]}
         />
-
-        {/* <button onClick={handleDemo}>Two People demo</button> */}
       </div>
     </div>
   );

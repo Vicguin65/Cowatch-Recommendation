@@ -70,13 +70,13 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+// This endpoint authenthicates the user
 app.post("/api/auth/google", async (req, res) => {
   const { idToken } = req.body;
 
   client = new OAuth2Client(
     process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-
+    process.env.GOOGLE_CLIENT_SECRET
   );
 
   try {
@@ -116,8 +116,7 @@ app.post("/api/auth/google", async (req, res) => {
           client_id: process.env.GOOGLE_CLIENT_ID,
           client_secret: process.env.GOOGLE_CLIENT_SECRET,
           grant_type: "authorization_code",
-          redirect_uri: 'postmessage',
-          
+          redirect_uri: "postmessage",
         },
       }
     );
@@ -144,11 +143,13 @@ app.post("/api/auth/google", async (req, res) => {
   }
 });
 
+//This endpoint is the callback after the authenthication.
 app.get("/auth/callback", async (req, res) => {
   const { code } = req.query;
   const { tokens } = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
 
+  // Gets OAuth2 client on behalf of user
   const oauth2 = google.oauth2({
     auth: oauth2Client,
     version: "v2",
@@ -156,6 +157,7 @@ app.get("/auth/callback", async (req, res) => {
   const { data } = await oauth2.userinfo.get(); // get user info
 
   try {
+    // Find User
     db.get(`SELECT * FROM users WHERE email = ?`, [data.email], (err, row) => {
       if (err) {
         res.status(201);
@@ -201,6 +203,7 @@ app.get("/auth/callback", async (req, res) => {
     res.status(400);
   }
 
+  // Create JWT Token for verification
   const token = jwt.sign(data.id, process.env.TOKEN_SECRET, {
     expiresIn: "4h",
   });
@@ -208,9 +211,8 @@ app.get("/auth/callback", async (req, res) => {
   res.redirect(`http://localhost:3000/room?token=${token}&googleId=${data.id}`);
 });
 
+// Starting auth endpoint
 app.get("/auth", async (req, res) => {
-  
-
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
@@ -265,6 +267,7 @@ app.post("/create-room", (req, res) => {
   const { googleId } = req.query.googleId;
 
   let userId;
+  // Query for user creating room
   const sql = `SELECT 1 FROM users WHERE googleId = ? LIMIT 1`;
   db.get(sql, [googleId], (err, row) => {
     if (err) {
@@ -280,11 +283,13 @@ app.post("/create-room", (req, res) => {
     }
   });
 
+  // Generate unique room code
   const newRoomCode = createUniqueCode();
   if (newRoomCode === -1) {
     res.status(501).json({ message: "ERROR: could not make room" });
   }
 
+  // Update room with owner
   db.run(
     `UPDATE rooms SET owner_id = ? WHERE code = ?`,
     [userId, newRoomCode],
@@ -312,6 +317,7 @@ app.post("/join-room", (req, res) => {
   const { googleId } = req.query.googleId;
   const { roomCode } = req.query.roomCode;
 
+  // Find user joining the room
   let userId;
   let sql = `SELECT 1 FROM users WHERE googleId = ? LIMIT 1`;
   db.get(sql, [googleId], (err, row) => {
@@ -328,6 +334,7 @@ app.post("/join-room", (req, res) => {
     }
   });
 
+  // Update user with room
   sql = `SELECT 1 FROM rooms WHERE roomCode = ? LIMIT 1`;
   db.get(sql, [roomCode], (err, row) => {
     if (err) {
@@ -341,6 +348,7 @@ app.post("/join-room", (req, res) => {
     }
   });
 
+  // Update users
   db.run(
     `UPDATE users SET roomCode = ? WHERE id = ?`,
     [roomCode, userId],

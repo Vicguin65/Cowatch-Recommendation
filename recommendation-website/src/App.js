@@ -10,6 +10,7 @@ import PlayerPage from "./pages/PlayerPage";
 
 function App() {
   return (
+    // Create Router for all pages
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />

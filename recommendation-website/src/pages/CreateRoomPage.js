@@ -7,14 +7,17 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import URL from "../global";
 
+// CreateRoom Page
 const CreateRoom = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  // Handler for IconClick
   const handleIconClick = () => {
     navigate("/room");
   };
 
+  // Handler for RoomClick
   const handleRoomClick = async () => {
     const payload = { googleId: user.sub };
     console.log("payload", payload);
@@ -30,6 +33,7 @@ const CreateRoom = () => {
     navigate("/panel");
   };
 
+  // Return Page
   return (
     <div className="create-room">
       <img

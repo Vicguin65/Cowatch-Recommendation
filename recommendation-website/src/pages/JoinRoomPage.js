@@ -6,15 +6,18 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import URL from "../global";
 
+//JoinRoom Page
 const JoinRoomPage = () => {
   const { user } = useContext(UserContext);
   const [roomCode, setRoomCode] = useState("");
   const navigate = useNavigate();
 
+  // Handler for IconClick
   const handleIconClick = () => {
     navigate("/room");
   };
 
+  // Handler for RoomClick
   const handleRoomClick = async () => {
     const payload = { googleId: user.sub, roomCode };
     console.log("payload", payload);
@@ -27,6 +30,7 @@ const JoinRoomPage = () => {
     navigate("/panel");
   };
 
+  // Return Page
   return (
     <div className="enter-room">
       <img

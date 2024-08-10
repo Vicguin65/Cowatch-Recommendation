@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Demo Page
 const DemoPage = () => {
+  // Handler for AuthOne
   const handleAuthOne = () => {
     window.location.href = "http://localhost:5000/auth?user=1";
   };
 
+  // Handler for AuthTwo
   const handleAuthTwo = () => {
     window.location.href = "http://localhost:5000/auth?user=2";
   };
 
+  /* ------------------------------------------------ */
+  // Setup API endpoints and grab channels for each user
   const [channelOne, setChannelOne] = useState(null);
 
   useEffect(() => {
@@ -26,6 +31,9 @@ const DemoPage = () => {
     });
   }, []);
 
+  /* ------------------------------------------------ */
+
+  // Return Page
   return (
     <div>
       <button onClick={handleAuthOne}>Select User 1</button>
@@ -40,6 +48,7 @@ const DemoPage = () => {
   );
 };
 
+// helper function to remap
 const ItemList = ({ items }) => {
   if (!items) return;
   return (
